@@ -26,7 +26,7 @@ jobs:
       # Sync files to S3
       - name: Deploy to S3
         run: |
-          aws s3 sync ./index.html s3://resume-bucket-davida --delete
+          aws s3 sync ./index.html s3://resume-bucket-davida 
         # Replace 'path-to-your-build-directory' with the folder that you want to deploy (e.g., 'build', 'dist', etc.)
         # Replace 'your-bucket-name' with your actual S3 bucket name.
         # '--delete' will delete files in the bucket that are no longer present in the source directory.

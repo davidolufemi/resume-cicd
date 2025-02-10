@@ -1,0 +1,33 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - main  # Change to your default branch if different
+    paths:
+      - '*.html'  # Change to the path of files you want to deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up AWS credentials
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Update with your S3 bucket region
+
+      # Sync files to S3
+      - name: Deploy to S3
+        run: |
+          aws s3 sync ./path-to-your-build-directory s3://your-bucket-name --delete
+        # Replace 'path-to-your-build-directory' with the folder that you want to deploy (e.g., 'build', 'dist', etc.)
+        # Replace 'your-bucket-name' with your actual S3 bucket name.
+        # '--delete' will delete files in the bucket that are no longer present in the source directory.

@@ -2,11 +2,10 @@ name: Deploy to S3
 
 on:
   push:
-    branches:
-      - main  # Change to your default branch if different
-    paths:
-      - '*.html'  # Change to the path of files you want to deploy
-
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+   
 jobs:
   deploy:
     runs-on: ubuntu-latest

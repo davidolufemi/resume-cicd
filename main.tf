@@ -14,13 +14,13 @@ provider "aws" {
 }
 
 #create S3 bucket
-resource "aws_s3_bucket" "resumebucket" {
-  bucket = "resume-bucket-davida"
+resource "aws_s3_bucket" "myresumebucketdavida" {
+  bucket = "my-resume-bucket-davida"
 }
 
 
 resource "aws_s3_bucket_versioning" "resumebucketversioning" {
-  bucket = aws_s3_bucket.resumebucket.id
+  bucket = aws_s3_bucket.myresumebucketdavida.id
   versioning_configuration {
     status = "Enabled"
   }
@@ -28,7 +28,7 @@ resource "aws_s3_bucket_versioning" "resumebucketversioning" {
 
 # Enable static website hosting
 resource "aws_s3_bucket_website_configuration" "website" {
-  bucket = aws_s3_bucket.resumebucket.id
+  bucket = aws_s3_bucket.myresumebucketdavida.id
 
   index_document {
     suffix = "index.html"
